@@ -16,7 +16,7 @@ public class CreateWaggonTruck extends CreateTruck implements SkillWaggonTruck {
     }
 
     @Override
-    public void TransportationBox() {
+    public void transportationBox() {
         System.out.println("transportation of boxes");
     }
 

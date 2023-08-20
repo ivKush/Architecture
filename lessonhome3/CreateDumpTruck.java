@@ -2,7 +2,7 @@ package lessonhome3;
 
 public class CreateDumpTruck extends CreateTruck implements SkillDumpTruck {
 
-    String board;
+    private String board;
 
     public CreateDumpTruck(TypeEngine typeEngine, int wheels, double cargoVolume, EngeneSize engeneSize, String board) {
         super(typeEngine, wheels, cargoVolume, engeneSize);

@@ -2,8 +2,8 @@ package lessonhome3;
 
 public class CreateTruck extends Car implements Truck {
 
-    double cargoVolume; // объём/вместительность кузова
-    EngeneSize engeneSize;
+    private double cargoVolume; // объём/вместительность кузова
+    private EngeneSize engeneSize;
 
     public CreateTruck(TypeEngine typeEngine, int wheels, double cargoVolume, EngeneSize engeneSize) {
         super(typeEngine, wheels);
