@@ -53,20 +53,4 @@ public class User {
         return "User [id=" + id + ", userName=" + userName + ", card=" + card + ", userTickets=" + userTickets + "]";
     }
     
-    // @Override
-    // public String toString() {
-    //     return "User [id=" + id + ", userName=" + userName + ", card=" + card + "]";
-    // }
-
-
-    
-
-    // public List<Card> getUserCards() {
-    //     return cards;
-    // }
-
-    // public void setUserCards(List<Card> cards) {
-    //     this.cards = cards;
-    // }
-
 }
