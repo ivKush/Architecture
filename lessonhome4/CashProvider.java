@@ -15,14 +15,20 @@ public class CashProvider {
         return card;
     }
 
-    public double balanceCardCustomer(int customerId) {
-        return searchCardCustomer(customerId).getBalanceCard();
+    public double balanceCardCustomer(int customerId) throws RuntimeException {
+        
+        for (Card card : listCardCustomer) {
+            if (card.getIdUser() == customerId) {
+                return card.getBalanceCard();
+            }
+        }
+        throw new RuntimeException("Нет такого покупателя");
     }
 
     public Card searchCardCustomer(int customerId) {
 
         for (Card card : listCardCustomer) {
-            if (card.getIdCustomer() == customerId) {
+            if (card.getIdUser() == customerId) {
                 return card;
             }
         }

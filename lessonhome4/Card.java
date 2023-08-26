@@ -2,18 +2,18 @@ package lessonhome4;
 
 public class Card {
 
-    private int idCustomer;
+    private int idUser;
     private int numberCard;
     private double balanceCard;
 
-    public Card(int idCustomer, int numberCard, double balanceCard) {
-        this.idCustomer = idCustomer;
+    public Card(int idUser, int numberCard, double balanceCard) {
+        this.idUser = idUser;
         this.numberCard = numberCard;
         this.balanceCard = balanceCard;
     }
 
-    public int getIdCustomer() {
-        return idCustomer;
+    public int getIdUser() {
+        return idUser;
     }
 
     public int getNumberCard() {
@@ -30,7 +30,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card [idCustomer=" + idCustomer + ", numberCard=" + numberCard + ", balanceCard=" + balanceCard + "]";
+        return "Card [idUser=" + idUser + ", numberCard=" + numberCard + ", balanceCard=" + balanceCard + "]";
     }
 
     

@@ -10,7 +10,7 @@ public class Customer extends TicketProvider {
 
     private List<Customer> customerList = new ArrayList<>();
     private List<Ticket> ticketsListCustomer = new ArrayList<>();
-    private CashProvider cashProvaider;
+    private CashProvider cashProvaider = new CashProvider();
 
     public Customer () {};
 
@@ -35,39 +35,38 @@ public class Customer extends TicketProvider {
         return id;
     }
 
-    // public List getTickets() {
-    //     return tickets;
-    // }
-
-    // public void setTickets(List tickets) {
-    //     this.tickets.addAll(tickets);
-    // }
-
-    public boolean buyTicket(int idCustomer, int countTicket) {
+    public boolean buyTicket(int idCustomer, int countTicket, Ticket ticket) {
         try {
-            user.setUserTickets(sellTicketsProvider(idCustomer, countTicket));
+            user.setUserTickets(sellTicketsProvider(idCustomer, countTicket, ticket));
             return true;
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
             return false;
         }
     }
 
     public void addCardUser(int idUser, int numberCard, double balanceCard) {
-        cashProvaider = new CashProvider();
+        
         for (Customer customer : customerList) {
             if (customer.getId() == idUser) {
+                // cashProvaider.openCardCustomer(idUser, numberCard, balanceCard);
                 customer.user.setCard(cashProvaider.openCardCustomer(idUser, numberCard, balanceCard));
             }
         }
     }
 
-    public double cardBalance(int id) {
-        cashProvaider = new CashProvider();
-        return cashProvaider.balanceCardCustomer(id);
+    public double cardBalance(int idUser) {
+        // cashProvaider = new CashProvider();
+        try {
+            return cashProvaider.balanceCardCustomer(idUser);
+            
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage()); 
+            return (Double) null;
+        }
     }
 
-    public Ticket searchTicket(long rootNumber) {
+    public Ticket searchTicket(long rootNumber) throws RuntimeException {
 
         for (Ticket ticket : user.getUserTickets()) {
             if (ticket.getRootNumber() == rootNumber) {
@@ -75,7 +74,6 @@ public class Customer extends TicketProvider {
             }
         }
         throw new RuntimeException("Нет билетов с такими данными");
-
     }
 
     @Override

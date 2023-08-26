@@ -11,7 +11,7 @@ public class Main {
         customer.addCardUser(2, 22222, 5000);
         customer.printCustomerList();
         
-        customer.buyTicket(2, 2);
+        customer.buyTicket(2, 2, new Ticket(124343434, 20, 10, true));
         customer.printCustomerList();
     }
 }

@@ -8,17 +8,14 @@ public class TicketProvider extends CashProvider {
     public Ticket ticket;
     // public List<Ticket> ticketList;
 
-    public List<Ticket> sellTicketsProvider(int customerId, int count) throws Exception {
+    public List<Ticket> sellTicketsProvider(int customerId, int countTikets, Ticket ticket) throws Exception {
         // ticket = new Ticket();
         List<Ticket> ticketList = new ArrayList<>();
-        if (balanceCardCustomer(customerId) >= (ticket.getPrice() * count)) {
-            transactionMinus(ticket.getPrice() * count);
-            while (count != 0) {
-                ticket.setValid(true);
-                // ticket = new Ticket(ticket.getRootNumber(), ticket.getPrice(), ticket.getPlace(), ticket.getDate(),
-                ticket = new Ticket(124343434, 20, 10, true);
+        if (balanceCardCustomer(customerId) >= (ticket.getPrice() * countTikets)) {
+            transactionMinus(ticket.getPrice() * countTikets);
+            while (countTikets != 0) {
                 ticketList.add(ticket);
-                count--;
+                countTikets--;
             }
             return ticketList;
         } else
