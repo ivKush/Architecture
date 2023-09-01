@@ -38,6 +38,7 @@ public class Customer extends TicketProvider {
     public boolean buyTicket(int idCustomer, int countTicket, Ticket ticket) {
         try {
             user.setUserTickets(sellTicketsProvider(idCustomer, countTicket, ticket));
+            System.out.println("Билеты куплены");
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -55,15 +56,13 @@ public class Customer extends TicketProvider {
         }
     }
 
-    public double cardBalance(int idUser) {
-        // cashProvaider = new CashProvider();
-        try {
-            return cashProvaider.balanceCardCustomer(idUser);
-            
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage()); 
-            return (Double) null;
+    public double cardBalance(int idUser) throws RuntimeException {
+        for (Customer customer : customerList) {
+            if (customer.id == idUser) {
+                return customer.getUserCustomer().getCard().getBalanceCard();
+            }
         }
+        throw new RuntimeException("Нет такого покупателя");
     }
 
     public Ticket searchTicket(long rootNumber) throws RuntimeException {

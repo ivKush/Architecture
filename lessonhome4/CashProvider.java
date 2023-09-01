@@ -10,20 +10,19 @@ public class CashProvider {
 
     public Card openCardCustomer(int idUser, int cardNumber, double balance) {
         card = new Card(idUser, cardNumber, balance);
-        // listCardCustomer = new ArrayList<>();
         listCardCustomer.add(card);
         return card;
     }
 
-    public double balanceCardCustomer(int customerId) throws RuntimeException {
-        
-        for (Card card : listCardCustomer) {
-            if (card.getIdUser() == customerId) {
-                return card.getBalanceCard();
-            }
-        }
-        throw new RuntimeException("Нет такого покупателя");
-    }
+    // public double balanceCardCustomer(int customerId) throws RuntimeException {
+    //     Customer cust = new Customer();
+    //     for (Customer customer  : cust.getCustomerList()) {
+    //         if (customer.getId() == customerId) {
+    //             return customer.getUserCustomer().getCard().getBalanceCard();
+    //         }
+    //     }
+    //     throw new RuntimeException("Нет такого покупателя");
+    // }
 
     public Card searchCardCustomer(int customerId) {
 
