@@ -1,0 +1,330 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Заказ на ресурсы облака",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/v1/",
+      "description": "Dev server"
+    }
+  ],
+  "paths": {
+    "/сlouds": {
+      "get": {
+        "summary": "Метод получения списка ресурсов на облако",
+        "tags": [
+          "Clouds"
+        ],
+        "operationId": "getAllClouds",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со списком ресурсов в облаке",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Clouds"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Всё остальное",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Метод создания заказа на облако",
+        "tags": [
+          "Clouds"
+        ],
+        "operationId": "createCloud",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "adplicationId/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешный ответ создания заказа на облако",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Clouds"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка, не верный запрос браузера клиента на сервер",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка, сервер не доступен",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Всё остальное",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clouds/{cloud_id}": {
+      "get": {
+        "summary": "Метод получения заказа на облако по ID",
+        "tags": [
+          "Clouds"
+        ],
+        "operationId": "getCloudById",
+        "parameters": [
+          {
+            "name": "cloud_id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор заказа облака",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ заказа облака по ID",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cloud"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка, не верный запрос браузера клиента на сервер",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка, сервер не доступен",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Всё остальное",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Метод отмены заказа на облако по ID",
+        "tags": [
+          "Clouds"
+        ],
+        "operationId": "cancelCloudById",
+        "parameters": [
+          {
+            "name": "cloud_id",
+            "in": "path",
+            "required": true,
+            "description": "Идентификатор заказа облака",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1234"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ отмены заказа облака по ID",
+            "content": {
+              "adplicationId/json": {}
+            }
+          },
+          "default": {
+            "description": "Всё остальное",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resourses": {
+      "get": {
+        "summary": "Метод получения свободенных ресурсов в облаке",
+        "tags": [
+          "Resourses"
+        ],
+        "operationId": "getAvailableResourses",
+        "responses": {
+          "200": {
+            "description": "Успешный ответ со списком ресурсов в облаке",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resourses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка, не верный запрос браузера клиента на сервер",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Ошибка, сервер не доступен",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Всё остальное",
+            "content": {
+              "adplicationId/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cloud": {
+        "type": "object",
+        "required": [
+          "id_server",
+          "OS",
+          "RAM"
+        ],
+        "properties": {
+          "OS": {
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "description": "OS"
+          },
+          "RAM": {
+            "type": "string",
+            "example": 256,
+            "description": "Количество оперативной памяти"
+          },
+          "id_server": {
+            "type": "string",
+            "example": "4321"
+          }
+        }
+      },
+      "Resourses": {
+        "type": "object",
+        "required": [
+          "CPU_available",
+          "RAM_available",
+          "HDD_available"
+        ],
+        "properties": {
+          "CPU_available": {
+            "type": "integer",
+            "description": "Кол-во доступных ядер в облаке"
+          },
+          "RAM_available": {
+            "type": "integer",
+            "description": "Кол-во доступной оперативной памяти в облаке"
+          },
+          "HDD_available": {
+            "type": "integer",
+            "description": "Кол-во памяти HDD в облаке"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error_code",
+          "error_message"
+        ],
+        "properties": {
+          "error_code": {
+            "type": "integer"
+          },
+          "error_message": {
+            "type": "string"
+          }
+        }
+      },
+      "Clouds": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Cloud"
+        }
+      }
+    }
+  }
+}
