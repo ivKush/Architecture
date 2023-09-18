@@ -1,0 +1,304 @@
+openapi: 3.0.0
+info:
+  title: Робот-пылесос
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Dev server
+paths:
+  /Robots:
+    get:
+      summary: Метод получения списка роботов
+      tags:
+        - Robot
+      operationId: getAllRobots
+      responses:
+        "200":
+          description: Успешный ответ со списком роботов
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robots"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания робота
+      tags:
+        - Robot
+      operationId: createRobot
+      requestBody:  
+        required: true  
+        content:
+          adplication/json:
+            schema:
+              $ref: "#/components/schemas/Robot"
+      responses:
+        "200":
+          description: Успешный ответ создания робота
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /Robot/findById/{robotId}:
+    get:
+      tags:
+        - Robot
+      summary: Найти робота по ID
+      description: Вернуть робота по ID
+      operationId: getRobotById
+      parameters:
+        - name: robotId
+          in: path
+          description: идентификатор робота
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Robot'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Robot'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Robot not found
+  /Users:
+    get:
+      summary: Метод получения списка пользователей
+      tags:
+        - User
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Успешный ответ со списком пользователей
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания пользователя
+      tags:
+        - User
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          adplication/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        "200":
+          description: Успешный ответ создания пользователя
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /User/findById/{userId}:
+    get:
+      tags:
+        - User
+      summary: Найти пользователя по ID
+      description: Вернуть пользователя по ID
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: идентификатор пользователя
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: User not found
+  /Schedule:
+    put:
+      tags:
+        - Schedule
+      summary: Обновить расписание
+      description: Обновить расписание
+      operationId: updateSchedule
+      requestBody:
+        description: Обновить существующее расписание
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Schedule'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schedule'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Schedule'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Schedule not found
+        '405':
+          description: Validation exception
+  /Schedules:
+    get:
+      summary: Метод получения списка роботов
+      tags:
+        - Schedule
+      operationId: getAllSchedules
+      responses:
+        "200":
+          description: Успешный ответ
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedules"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Robot:
+      type: object
+      required:
+        - id
+        - model
+        - version
+        - status
+        - resourse
+        - fabric_model
+        - ip_adress
+      properties:
+        id:
+          type: integer
+          example: 1
+        model:
+          type: string
+          example: D-4
+          description: Модель пылесоса
+        version:
+          type: string
+          example: 1.1
+        status:
+          type: string
+          example: worker
+        resourse:
+          type: integer
+          example: 10
+        fabric_model:
+          type: string
+          example: 12345sd67f
+          description: Заводской номер робота-пылесоса
+        id_adress:
+          type: string
+          example: 192.168.0.0
+    Robots:
+      type: array
+      items:
+        $ref: "#/components/schemas/Robot"
+    User:
+      type: object
+      required:
+        - id
+        - login
+        - password
+        - email
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Идентификатор пользователя
+        login:
+          type: string
+          example: UserName
+          description: Имя пользователя
+        hash_password:
+          type: string
+          example: 1234
+          description: Пароль пользователя
+        email:
+          type: string
+          example: UserName@mail.ru
+          description: Почта пользователя
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+    Schedule:
+      type: object
+      required:
+        - id
+        - dateTime
+        - id_robot
+      properties:
+        id:
+          type: integer
+          example: 1
+          description: Идентификатор расписания
+        dateTime:
+          type: string
+          example:  01/01/2023 08:00:00
+          description: Расписание работы робота
+        id_robot:
+          type: integer
+          example: 1
+          description: Идентификатор робота
+    Schedules:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schedule' 
+    Error:
+      type: object
+      required: 
+        - code_error
+        - message_error
+      properties:
+        code_error:
+          type: integer
+          example: -1
+        message_error:
+          type: string
